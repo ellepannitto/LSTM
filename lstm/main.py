@@ -1,11 +1,9 @@
 import argparse
 from argparse import RawTextHelpFormatter, ArgumentDefaultsHelpFormatter
-#from email import parser
+
 import logging.config
 import os
 from random import choices
-
-#from parso import parse
 
 from lstm.utils import config_utils as cutils
 from lstm.core import network_pipeline as network
