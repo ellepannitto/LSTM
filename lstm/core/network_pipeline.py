@@ -19,7 +19,7 @@ from lstm.core import network_lib as network
 
 logger = logging.getLogger(__name__)
 
-opt_logger = JSONLogger(path="./optimizer_logger.json")
+opt_logger = JSONLogger(path="./optimizer_logger.json", reset=False)
 
 
 def main(output_dir, input_dir, 
