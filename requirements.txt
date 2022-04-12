@@ -1,0 +1,4 @@
+pyyaml
+torch
+bayesian_optimization
+scipy==1.7
