@@ -7,7 +7,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from lstm.core import network_lib as network
 from lstm.utils import torch_utils as tutils
 
 
