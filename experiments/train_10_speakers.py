@@ -4,8 +4,8 @@ import lstm
 
 random.seed(146)
 
-input_dir = sys.argv[1]
-output_dir = sys.argv[2]
+_input_dir = sys.argv[1]
+_output_dir = sys.argv[2]
 
 # | iter | targ train_batch_size | emsize | nhid | learning_rate | epochs | seq_length |
 # | 95 | 1.227 | 23.491 | 383.248 | 480.480 | 0.965 | 38.488 | 20.063 |
@@ -33,8 +33,8 @@ for i in range(1, 11):
 
     print("READING FOLDER N.{}".format(folder_n))
 
-    input_dir = input_dir+"/{}".format(folder_n)
-    output_dir = output_dir+"/{}".format(folder_n)
+    input_dir = _input_dir+"/{}".format(folder_n)
+    output_dir = _output_dir+"/{}".format(folder_n)
 
     lstm.core.network_pipeline.main(output_dir, input_dir, 
          epochs, train_batch_size, eval_batch_size, seq_length, 
