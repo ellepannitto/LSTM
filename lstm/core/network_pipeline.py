@@ -9,6 +9,7 @@ from bayes_opt.event import Events
 
 import time
 import math
+import numpy as np
 
 from lstm.utils import os_utils as outils
 from lstm.utils import corpus_utils as cutils

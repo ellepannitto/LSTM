@@ -1,5 +1,6 @@
 import argparse
 from argparse import RawTextHelpFormatter, ArgumentDefaultsHelpFormatter
+from email import parser
 
 import logging.config
 import os
@@ -7,6 +8,7 @@ from random import choices
 
 from lstm.utils import config_utils as cutils
 from lstm.core import network_pipeline as network
+from lstm.core import babbling as babbling
 
 config_dict = cutils.load(os.path.join(os.path.dirname(__file__), 'logging_utils', 'logging.yml'))
 logging.config.dictConfig(config_dict)
@@ -82,6 +84,15 @@ def _train(args):
                   clip, learning_rate, log_interval,
                   emsize, nhid, nlayers, dropout, tied, model_type, 
                   seed, cuda)
+
+
+def _babble(args):
+    output_dir = args.output_dir
+    model_fpath = args.model_path
+    number_of_words = args.words_number
+    seed = args.seed
+
+    babbling.babble(output_dir, model_fpath, number_of_words, seed)
 
 
 def main():
@@ -182,6 +193,20 @@ def main():
     parser_optimize.add_argument('--cuda', type=bool, default=False,
                                  help="cuda flag")
     parser_optimize.set_defaults(func=_optimize)                                        
+
+    parser_babble = subparsers.add_parser("babble",
+                                          description='sample babbling from model',
+                                          help='sample babbling from model',
+                                          formatter_class=ArgumentDefaultsHelpFormatter)
+    parser_babble.add_argument('-o', "--output-dir", default="data/models/",
+                               help="path to output directory")
+    parser_babble.add_argument('-m', "--model-path", required=True,
+                               help="filepath to model .pt")
+    parser_babble.add_argument('-n', '--words-number', type=int, default=500000,
+                               help="number of words to sample")
+    parser_babble.add_argument('-s', '--seed', type=int, default=42,
+                                help='random seed')
+    parser_babble.set_defaults(func=_babble)
 
     args = root_parser.parse_args()
     if "func" not in args:
