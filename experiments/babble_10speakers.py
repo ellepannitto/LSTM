@@ -22,7 +22,7 @@ for i in range(1, 11):
 
     seed = random.randint(0,1000)
 
-    model_path = glob.glob(_model_dir+"/{}/*.pt".format(n))[0]
+    model_path = list(glob.glob(_model_dir+"/{}/*.pt".format(n)))[0]
     corpus_path = _corpus_dir+"/{}".format(n)
     output_path = _output_dir+"/{}".format(n)
 
