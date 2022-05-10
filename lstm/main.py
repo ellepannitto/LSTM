@@ -91,7 +91,7 @@ def _babble(args):
     model_fpath = args.model_path
     corpus_dir = args.corpus_dir
     n_iterations = args.iterations
-    max_sen_len = args.max_sentence_length
+    max_sen_len = args.max_len_sent
     batches = args.batches
 
 #    seed = args.seed
