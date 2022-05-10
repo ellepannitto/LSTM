@@ -1,11 +1,13 @@
 import os
 import sys
 import random
+import glob
+
 import lstm
 
 random.seed(146)
 
-model_path = sys.argv[1]
+_model_dir = sys.argv[1]
 _corpus_dir = sys.argv[2]
 _output_dir = sys.argv[3]
 
@@ -20,6 +22,7 @@ for i in range(1, 11):
 
     seed = random.randint(0,1000)
 
+    model_path = glob.glob(_model_dir+"/{}/*.pt".format(n))[0]
     corpus_path = _corpus_dir+"/{}".format(n)
     output_path = _output_dir+"/{}".format(n)
 
