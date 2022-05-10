@@ -211,8 +211,8 @@ def main():
                                help="number of words to sample")
     parser_babble.add_argument('--max-len-sent', type=int, default=40)
     parser_babble.add_argument('-b', '--batches', type=int, default=2)
-#    parser_babble.add_argument('-s', '--seed', type=int, default=42,
-#                                help='random seed')
+    parser_babble.add_argument('-s', '--seed', type=int, default=427,
+                                help='random seed')
     parser_babble.set_defaults(func=_babble)
 
     args = root_parser.parse_args()
