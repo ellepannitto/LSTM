@@ -11,16 +11,16 @@ from lstm.utils import torch_utils as tutils
 
 logger = logging.getLogger(__name__)
 
-def babble(output_path, model_path, corpus_path, n_iterations, max_len_sent, batches):
+def babble(output_path, model_path, corpus_path, n_iterations, max_len_sent, batches, seed):
 
     for batch_n in range(batches):
         logger.info("BATCH {}".format(batch_n))
         main_sample_parallel(output_path, model_path, corpus_path,
-                             n_iterations, max_len_sent, batch_n)
+                             n_iterations, max_len_sent, batch_n, seed)
 
 
 def main_sample_parallel(output_path, model_path, corpus_path,
-                         n_iterations, max_len_sent, batch_n):
+                         n_iterations, max_len_sent, batch_n, seed):
 
     
 
@@ -48,7 +48,7 @@ def main_sample_parallel(output_path, model_path, corpus_path,
                 hidden = model.init_hidden(1)
                 startwith = corpus.sample_first_letter()
 
-                input_data = tutils.batchify([torch.LongTensor([startwith, ])], 1, cuda)
+                input_data = tutils.batchify([torch.LongTensor([startwith, ])], 1, cuda, seed)
 
                 data = input_data
 
@@ -70,7 +70,7 @@ def main_sample_parallel(output_path, model_path, corpus_path,
                     choice = np.random.choice(choices[0], p=probabilities)
                     s.append(choice)
 
-                    input_data = nutils.batchify([torch.LongTensor([choice, ])], 1, cuda)
+                    input_data = tutils.batchify([torch.LongTensor([choice, ])], 1, cuda)
                     data = input_data
                     number_of_generated_chars_before_newline += 1
 
@@ -79,8 +79,8 @@ def main_sample_parallel(output_path, model_path, corpus_path,
                         number_of_generated_sentences += 1
                         number_of_generated_chars_before_newline = 0
 
-                        input_data = nutils.batchify([torch.LongTensor([corpus.dictionary.letter2idx["\n"], ])],
-                                                     1, cuda)
+                        input_data = tutils.batchify([torch.LongTensor([corpus.dictionary.letter2idx["\n"], ])],
+                                                     1, cuda, seed)
                         data = input_data
 
                     if choice == corpus.dictionary.letter2idx["\n"]:
@@ -90,10 +90,3 @@ def main_sample_parallel(output_path, model_path, corpus_path,
                 sent = [corpus.dictionary.idx2letter[char] for char in s]
                 print("".join(sent), file=fout)
                 print("\n\n", file=fout)
-
-
-def parallel_babble(output_dir, model_fpath, corpus_dir, n_iterations, max_sen_len, workers):
-    for i in range(workers):
-        print("BATCH", i)
-        main_sample_parallel(output_dir, model_path, corpus_dir,
-                             n_iterations, max_sen_len)

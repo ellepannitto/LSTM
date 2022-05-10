@@ -94,8 +94,8 @@ def _babble(args):
     max_sen_len = args.max_len_sent
     batches = args.batches
 
-#    seed = args.seed
-    babbling.babble(output_dir, model_fpath, corpus_dir, n_iterations, max_sen_len, batches)
+    seed = args.seed
+    babbling.babble(output_dir, model_fpath, corpus_dir, n_iterations, max_sen_len, batches, seed)
 
 
 def main():
