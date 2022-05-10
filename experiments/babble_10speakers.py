@@ -23,10 +23,10 @@ for i in range(1, 11):
     seed = random.randint(0,1000)
 
     model_str = _model_dir+"/{}/*.pt".format(n)
-    print(model_str)
+#    print(model_str)
     model_path = list(glob.glob(model_str))[0]
-    print(list(glob.glob(model_str)))
-    input()
+#    print(list(glob.glob(model_str)))
+#    input()
 
     corpus_path = _corpus_dir+"/{}".format(n)
     output_path = _output_dir+"/{}".format(n)
