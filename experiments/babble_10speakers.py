@@ -22,7 +22,7 @@ for i in range(1, 11):
 
     seed = random.randint(0,1000)
 
-    model_path = list(glob.glob(_model_dir+"/{}/*.pt".format(n)))[0]
+#    model_path = list(glob.glob(_model_dir+"/{}/*.pt".format(n)))[0]
     print(_model_dir+"/{}/*.pt".format(n))
     print(list(glob.glob(_model_dir+"/{}/*.pt".format(n))))
     input()
