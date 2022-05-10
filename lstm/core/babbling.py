@@ -70,7 +70,7 @@ def main_sample_parallel(output_path, model_path, corpus_path,
                     choice = np.random.choice(choices[0], p=probabilities)
                     s.append(choice)
 
-                    input_data = tutils.batchify([torch.LongTensor([choice, ])], 1, cuda)
+                    input_data = tutils.batchify([torch.LongTensor([choice, ])], 1, cuda, seed)
                     data = input_data
                     number_of_generated_chars_before_newline += 1
 
