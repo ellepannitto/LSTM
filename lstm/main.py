@@ -89,10 +89,13 @@ def _train(args):
 def _babble(args):
     output_dir = args.output_dir
     model_fpath = args.model_path
-    number_of_words = args.words_number
-    seed = args.seed
+    corpus_dir = args.corpus_dir
+    n_iterations = args.iterations
+    max_sen_len = args.max_sentence_length
+    batches = args.batches
 
-    babbling.babble(output_dir, model_fpath, number_of_words, seed)
+#    seed = args.seed
+    babbling.babble(output_dir, model_fpath, corpus_dir, n_iterations, max_sen_len, batches)
 
 
 def main():
@@ -202,10 +205,14 @@ def main():
                                help="path to output directory")
     parser_babble.add_argument('-m', "--model-path", required=True,
                                help="filepath to model .pt")
-    parser_babble.add_argument('-n', '--words-number', type=int, default=500000,
+    parser_babble.add_argument('-c', '--corpus-dir', required=True,
+                               help="path to directory containing corpus")
+    parser_babble.add_argument('-i', '--iterations', type=int, default=100,
                                help="number of words to sample")
-    parser_babble.add_argument('-s', '--seed', type=int, default=42,
-                                help='random seed')
+    parser_babble.add_argument('--max-len-sent', type=int, default=40)
+    parser_babble.add_argument('-b', '--batches', type=int, default=2)
+#    parser_babble.add_argument('-s', '--seed', type=int, default=42,
+#                                help='random seed')
     parser_babble.set_defaults(func=_babble)
 
     args = root_parser.parse_args()
