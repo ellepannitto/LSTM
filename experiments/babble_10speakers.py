@@ -33,4 +33,6 @@ for i in range(1, 11):
 
     os.makedirs(output_path, exist_ok=True)
 
-    lstm.babble(output_path, model_path, corpus_path, n_iterations, max_len_sent, batches, seed)
+    lstm.core.babbling.babble(output_path, model_path, 
+                              corpus_path, n_iterations, 
+                              max_len_sent, batches, seed)
