@@ -28,8 +28,8 @@ for i in range(1, 11):
 #    print(list(glob.glob(model_str)))
 #    input()
 
-    corpus_path = _corpus_dir+"/{}".format(n)
-    output_path = _output_dir+"/{}".format(n)
+    corpus_path = _corpus_dir+"/{}/".format(n)
+    output_path = _output_dir+"/{}/".format(n)
 
     os.makedirs(output_path, exist_ok=True)
 
